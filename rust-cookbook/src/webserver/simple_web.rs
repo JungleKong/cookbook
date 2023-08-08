@@ -1,6 +1,5 @@
 use std::fs;
 use std::io::prelude::*;
-use std::net::TcpListener;
 use std::net::TcpStream;
 use std::thread;
 use std::time::Duration;
@@ -78,7 +77,7 @@ impl Drop for ThreadPool {
 }
 
 
-fn handle_connection(mut stream: TcpStream) {
+pub fn handle_connection(mut stream: TcpStream) {
     let mut buffer = [0; 1024];
     stream.read(&mut buffer).unwrap();
 
@@ -109,6 +108,7 @@ fn handle_connection(mut stream: TcpStream) {
 
 #[test]
 fn test_main() {
+    use std::net::TcpListener;
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
     let pool = ThreadPool::new(4);
 
