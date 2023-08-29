@@ -586,6 +586,7 @@ name = "rust-cookbook"
 version = "0.1.0"
 dependencies = [
  "image",
+ "png",
  "rand",
  "tokio",
 ]
