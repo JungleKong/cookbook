@@ -1,19 +1,30 @@
-use std::collections::HashMap;
 
+pub mod solution {
+    use std::collections::HashMap;
 
-mod Solution {
-    fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
+    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {
         let mut map = HashMap::new();
-        let mut result = Vec::new();
         for (i, &num) in nums.iter().enumerate() {
             let complement = target - num;
             if map.contains_key(&complement) {
-                result.push(*map.get(&complement).unwrap());
-                result.push(i as i32);
-                return result;
+                return vec![map[&complement], i as i32];
             }
             map.insert(num, i as i32);
         }
-        result
+        vec![]
+    }
+}
+
+
+#[cfg(test)]
+mod test_leetcode {
+    use super::*;
+
+    #[test]
+    fn test_two_sum() {
+        let nums = vec![2, 7, 11, 15];
+        let target = 9;
+        let result = solution::two_sum(nums, target);
+        assert_eq!(result, vec![0, 1]);
     }
 }
